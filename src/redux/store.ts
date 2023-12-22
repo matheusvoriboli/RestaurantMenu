@@ -1,10 +1,12 @@
 import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
+import menuReducer from './features/menu-slice';
 import resturantaReducer from './features/restaurant-slice';
 
 export const store = configureStore({
    reducer: {
-      restaurant: resturantaReducer
+      restaurant: resturantaReducer,
+      menu: menuReducer,
    }
 })
 

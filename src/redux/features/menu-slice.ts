@@ -1,6 +1,6 @@
 // import { BookingState } from "@/interfaces/BookingState";
-import { getRestaurantDetails } from "@/services/restaurantService";
-import { Restaurant } from "@/types/Restaurant";
+import { getMenuDetails } from "@/services/menuService";
+import { Menu } from "@/types/Menu";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 // import Swal from "sweetalert2";
 
@@ -13,27 +13,27 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 //   value: [] as BookingState[],
 // } as InitialState;
 
-export const fetchRestaurantDetails = createAsyncThunk(
-  "restaurant/getRestaurantDetails",
+export const fetchMenuDetails = createAsyncThunk(
+  "menu/getMenuDetails",
   async () => {
-    const response = await getRestaurantDetails();
+    const response = await getMenuDetails();
     return response;
   }
 );
 
 const initialState = {
-  value: {} as Restaurant,
+  value: {} as Menu,
 };
 
-export const restaurant = createSlice({
-  name: "restaurant",
+export const menu = createSlice({
+  name: "menu",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-      builder.addCase(fetchRestaurantDetails.fulfilled, (state, action) => {
+      builder.addCase(fetchMenuDetails.fulfilled, (state, action) => {
          state.value = action.payload;
       });
   }
 });
 
-export default restaurant.reducer;
+export default menu.reducer;
