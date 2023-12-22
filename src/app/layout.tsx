@@ -1,3 +1,4 @@
+import { ReduxProvider } from '@/redux/provider'
 import type { Metadata } from 'next'
 import { Roboto_Flex as Roboto, } from 'next/font/google'
 import './globals.css'
@@ -16,7 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={roboto.className}>{children}</body>
+      <ReduxProvider>
+        <body className={roboto.className}>{children}</body>
+      </ReduxProvider>
     </html>
   )
 }
