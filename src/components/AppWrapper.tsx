@@ -7,11 +7,7 @@ import { useDispatch } from "react-redux";
 import Header from "./Header";
 import Loader from "./Loader";
 
-export default function AppWrapper({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AppWrapper ({children}: {children: React.ReactNode;})  {
   const dispatch = useDispatch<AppDispatch>();
   const response = useAppSelector((state) => state.restaurant.value);
   useEffect(() => {
@@ -33,6 +29,7 @@ export default function AppWrapper({
               "--main-bg": `${response.webSettings.backgroundColour}`,
             } as React.CSSProperties
           }
+          className="h-screen"
         >
           <Header title="Menu" />
           {children}

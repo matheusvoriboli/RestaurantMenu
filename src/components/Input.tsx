@@ -9,7 +9,7 @@ type InputProps = {
 export default function Input({
   type = "text",
   placeholder,
-  icon,
+  icon
 }: InputProps) {
   return (
     <div className="relative">
@@ -21,7 +21,7 @@ export default function Input({
       <input
         type={type}
         placeholder={placeholder}
-        className={`border-custom-gray border-[1px] rounded-md w-full p-2 ${icon && "pl-8"}`}
+        className={` border-custom-gray border-[1px] rounded-md w-full p-2 ${icon && "pl-8"}`}
       />
     </div>
   );
