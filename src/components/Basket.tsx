@@ -1,6 +1,6 @@
 export default function Basket() {
    return (
-      <div className="bg-background-default shadow h-fit">
+      <div className="bg-background-default shadow h-fit min-w-80">
          <div className="p-5">
             <h1 className="text-secondary text-xl font-semibold">Carrinho</h1>
          </div>

@@ -13,7 +13,7 @@ export default function MenuCarousel({className}: MenuCarouselProps) {
       {Object.keys(response).length === 0 ? (
         <Loader />
       ) : (
-        <div className="flex w-full gap-16">
+        <div className="flex w-full gap-12 overflow-x-auto">
           {response.sections.map((section) => (
             <MenuCarouselCard title={section.name} image={section.images[0].image} key={section.id}/>
           ))}

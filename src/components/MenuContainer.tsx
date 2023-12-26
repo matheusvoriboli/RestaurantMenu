@@ -9,7 +9,7 @@ export default function MenuContainer() {
   const menuResponse = useAppSelector((state) => state.menu.value);
   return (
     <div
-      className="p-4 gap-8 lg:shadow max-w-[600px]"
+      className="p-4 gap-8 lg:shadow w-full"
       style={{
         backgroundColor: restaurantResponse.webSettings?.backgroundColour,
       }}

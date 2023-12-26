@@ -21,7 +21,7 @@ export default function Menu() {
         />
       </div>
       <div className="flex justify-center bg-background-subtle">
-        <div className="bg-background-default lg:py-8 lg:px-10 w-full">
+        <div className="bg-background-default lg:py-8 lg:px-10 w-full lg:max-w-[1024px]">
           <div className="flex flex-col bg-custom">
             <div className="lg:my-2 lg:block hidden ">
               <Input
