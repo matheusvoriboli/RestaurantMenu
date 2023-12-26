@@ -2,6 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+   --nav-height: 3rem;
+}
+
+@media screen and (max-width: 1024px) {
+   :root {
+      --nav-height: 4rem;
+   }
+}
+
+.header {
+   height: var(--nav-height);
+   background-color: var(--nav-bg);
+   color: white;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+@media screen and (min-width: 1024px) {
+   .custom-content-height {
+      min-height: calc(100vh - var(--nav-height) - 9rem); /* 9rem = banner image size */
+   }
+ }
+
 .main-bg {
    background-color: var(--primary);
 }
