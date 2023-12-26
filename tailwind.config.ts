@@ -16,12 +16,17 @@ const config: Config = {
       colors: {
         'background-default': '#F8F9FA',
         'background-subtle': '#EEEEEE',
+        'inactive': '#5F5F5F',
+        'inactive-background': '#DADADA',
         'custom-gray': '#8A94A4',
         main: '#121212',
         secondary: '#464646'
       }
     },
     screens: {
+      'xsm': '480px',
+      // => @media (min-width: 480px) { ... }
+
       'sm': '640px',
       // => @media (min-width: 640px) { ... }
 

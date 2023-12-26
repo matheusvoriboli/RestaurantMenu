@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export default function Menu() {
   const restaurantResponse = useAppSelector((state) => state.restaurant.value);
-  const menuResponse = useAppSelector((state) => state.menu.value);
+  // const menuResponse = useAppSelector((state) => state.menu.value);
   return (
     <div className="flex flex-col">
       <div className="relative w-full h-36">

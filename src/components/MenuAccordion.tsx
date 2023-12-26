@@ -1,7 +1,10 @@
+import { setCurrentItem, toggleSelectedItemContainerVisibility } from "@/redux/features/order-slice";
+import { AppDispatch } from "@/redux/store";
 import { Item } from "@/types/Menu";
 import { CaretDown } from "@phosphor-icons/react";
 import Image from "next/image";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 type MenuAccordionProps = {
   items: Item[];
@@ -11,6 +14,7 @@ type MenuAccordionProps = {
 
 export default function MenuAccordion ({ items, title, currency = "R$" }: MenuAccordionProps) {
   const [accordionOpened, setAccordionOpened] = useState(true);
+  const dispatch = useDispatch<AppDispatch>();
 
   return (
     <div className="flex flex-col gap-6" >
@@ -25,7 +29,10 @@ export default function MenuAccordion ({ items, title, currency = "R$" }: MenuAc
       {items &&
         accordionOpened &&
         items?.map((item) => (
-          <div className="flex flex-col" key={item.id}>
+          <div className="flex flex-col" key={item.id} onClick={() => {
+            dispatch(toggleSelectedItemContainerVisibility())
+            dispatch(setCurrentItem(item))
+          } }>
             <div className="flex justify-between">
               <div className="flex flex-col w-6/12">
                 <p className="text-main">{item.name}</p>
