@@ -11,15 +11,14 @@ export default function Basket() {
   const checkoutResponse = useAppSelector((state) => state.checkout.value);
   const restaurantResponse = useAppSelector((state) => state.restaurant.value);
 
-
   const updateBasketItem = (item: CheckoutItem, quantity: number) => {
-    if(item.selectedModifier) {
+    if (item.selectedModifier) {
       dispatch(
         updateOrderItem({
           item: item.item,
           quantity: quantity,
           price: (item.item.price + item.selectedModifier.price) * quantity,
-          selectedModifier: item.selectedModifier
+          selectedModifier: item.selectedModifier,
         })
       );
     } else {
@@ -31,7 +30,15 @@ export default function Basket() {
         })
       );
     }
-  }
+  };
+
+  const getTotalValue = () => {
+    let totalValue = 0;
+    checkoutResponse.forEach((item) => {
+      totalValue += item.price;
+    });
+    return `${restaurantResponse.currency} ${totalValue.toFixed(2)}`;
+  };
 
   return (
     <div className="bg-background-default shadow h-fit min-w-80">
@@ -44,30 +51,61 @@ export default function Basket() {
         ) : (
           <ul>
             {checkoutResponse.map((order) => (
-              <li className="flex justify-between px-4 py-2" key={order?.selectedModifier ? order?.selectedModifier.id : order?.item.id}>
+              <li
+                className="flex justify-between px-4 py-2"
+                key={
+                  order?.selectedModifier
+                    ? order?.selectedModifier.id
+                    : order?.item.id
+                }
+              >
                 <div className="flex flex-col p-1">
-                  <span className="text-main">
-                    {order?.item?.name}
-                  </span>
+                  <span className="text-main">{order?.item?.name}</span>
                   <span className="text-inactive">
                     {order?.selectedModifier?.name}
                   </span>
                   <div className="flex items-center gap-1 mt-2">
-                    <Button size={ButtonSize.Small} circleButton onClick={() => updateBasketItem(order, order?.quantity - 1)}>
-                      <Minus weight="bold"/>
+                    <Button
+                      size={ButtonSize.Small}
+                      circleButton
+                      onClick={() =>
+                        updateBasketItem(order, order?.quantity - 1)
+                      }
+                    >
+                      <Minus weight="bold" />
                     </Button>
                     <span className="px-2">{order?.quantity}</span>
-                    <Button size={ButtonSize.Small} circleButton onClick={() => updateBasketItem(order, order?.quantity + 1)}>
-                      <Plus weight="bold"/>
+                    <Button
+                      size={ButtonSize.Small}
+                      circleButton
+                      onClick={() =>
+                        updateBasketItem(order, order?.quantity + 1)
+                      }
+                    >
+                      <Plus weight="bold" />
                     </Button>
                   </div>
                 </div>
-                <div className="p-5">{restaurantResponse.currency} {order?.price.toFixed(2)}</div>
+                <div className="p-5">
+                  {restaurantResponse.currency} {order?.price.toFixed(2)}
+                </div>
               </li>
             ))}
           </ul>
         )}
       </div>
+      {checkoutResponse.length > 0 && (
+        <>
+          <div className="flex justify-between px-4 py-5 text-main">
+            <span>Sub Total</span>
+            <span className="font-semibold">{getTotalValue()}</span>
+          </div>
+          <div className="flex justify-between px-4 py-5 border-t border-inactive-background text-main text-2xl">
+            <span>Total</span>
+            <span className="font-semibold">{getTotalValue()}</span>
+          </div>
+        </>
+      )}
     </div>
   );
 }
