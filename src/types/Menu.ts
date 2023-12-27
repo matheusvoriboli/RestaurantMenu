@@ -3,7 +3,7 @@ type Image = {
    image: string;
  };
  
- type ModifierItem = {
+ export type ModifierItem = {
    id: number;
    name: string;
    price: number;
