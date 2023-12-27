@@ -41,8 +41,8 @@ export default function Basket() {
   };
 
   return (
-    <div className="bg-background-default shadow h-fit min-w-80">
-      <div className="p-5 flex justify-center">
+    <div className="lg:bg-background-default bg-white lg:shadow lg:h-fit h-full min-w-80 relative">
+      <div className="p-5 flex justify-center border-b lg:border-b-0 border-b-inactive-background">
         <h1 className="text-main text-xl font-semibold">Carrinho</h1>
       </div>
       <div className="bg-white">
@@ -52,7 +52,7 @@ export default function Basket() {
           <ul>
             {checkoutResponse.map((order) => (
               <li
-                className="flex justify-between px-4 py-2"
+                className="flex justify-between items-center px-4 py-2 border-b border-inactive-background lg:border-b-0"
                 key={
                   order?.selectedModifier
                     ? order?.selectedModifier.id
@@ -64,7 +64,7 @@ export default function Basket() {
                   <span className="text-inactive">
                     {order?.selectedModifier?.name}
                   </span>
-                  <div className="flex items-center gap-1 mt-2">
+                  <div className="flex items-center gap-1 mt-2 ms-1">
                     <Button
                       size={ButtonSize.Small}
                       circleButton
@@ -86,7 +86,7 @@ export default function Basket() {
                     </Button>
                   </div>
                 </div>
-                <div className="p-5">
+                <div className="">
                   {restaurantResponse.currency} {order?.price.toFixed(2)}
                 </div>
               </li>
@@ -95,17 +95,22 @@ export default function Basket() {
         )}
       </div>
       {checkoutResponse.length > 0 && (
-        <>
+        <div className="bg-background-default h-full">
           <div className="flex justify-between px-4 py-5 text-main">
             <span>Sub Total</span>
             <span className="font-semibold">{getTotalValue()}</span>
           </div>
-          <div className="flex justify-between px-4 py-5 border-t border-inactive-background text-main text-2xl">
+          <div className="flex justify-between px-4 py-5 border-t border-inactive-background text-main text-2xl h-full">
             <span>Total</span>
             <span className="font-semibold">{getTotalValue()}</span>
           </div>
-        </>
+        </div>
       )}
+      <div className="lg:hidden bg-[rgba(255,255,255,0.3)] fixed bottom-0 pb-6 backdrop-blur-sm flex flex-col justify-between pt-3 gap-4 w-full px-2 py-4">
+        <Button fullScreen onClick={() => {}}>
+          Checkout now
+        </Button>
+      </div>
     </div>
   );
 }
