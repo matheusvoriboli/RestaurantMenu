@@ -4,7 +4,7 @@ import { AppDispatch, useAppSelector } from "@/redux/store";
 import { Item } from "@/types/Menu";
 import { CaretDown } from "@phosphor-icons/react";
 import Image from "next/image";
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import Modal from "./Modal";
@@ -16,11 +16,8 @@ type MenuAccordionProps = {
   currency: string;
 };
 
-export default function MenuAccordion({
-  items,
-  title,
-  currency = "R$",
-}: MenuAccordionProps) {
+const MenuAccordion = forwardRef<HTMLDivElement, MenuAccordionProps>(
+  ({ items, title, currency = "R$"}: MenuAccordionProps, ref) => {
   const [accordionOpened, setAccordionOpened] = useState(true);
   const dispatch = useDispatch<AppDispatch>();
   const isModalVisible = useAppSelector((state) => state.modal.value);
@@ -35,7 +32,7 @@ export default function MenuAccordion({
       >
         <SelectedItemContainer />
       </Modal>
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-6" ref={ref}>
         <div className="flex justify-between">
           <h1 className="text-2xl font-semibold">{title}</h1>
           <button onClick={() => setAccordionOpened((state) => !state)}>
@@ -85,4 +82,6 @@ export default function MenuAccordion({
       </div>
     </>
   );
-}
+});
+
+export default MenuAccordion;

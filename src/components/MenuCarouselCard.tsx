@@ -5,14 +5,17 @@ type MenuCarouselCardProps = {
   title: string;
   image: string;
   active?: boolean;
+  onClick?: () => void;
 };
 
 export default function MenuCarouselCard({
   title,
   image,
   active = true,
+  onClick
 }: MenuCarouselCardProps) {
   const response = useAppSelector((state) => state.restaurant.value);
+
   return (
     <div
       style={
@@ -21,6 +24,7 @@ export default function MenuCarouselCard({
           : {}
       }
       className="flex flex-col items-center"
+      onClick={onClick}
     >
       <div className="relative overflow-hidden rounded-full bg-black h-20 w-20">
         <Image
