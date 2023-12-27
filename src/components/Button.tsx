@@ -3,13 +3,14 @@ import { useAppSelector } from "@/redux/store";
 
 type ButtonProps = {
   children: React.ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   backgroundColor?: string;
   textColor?: string;
   fullScreen?: boolean;
   disabled?: boolean;
   circleButton?: boolean;
   size?: ButtonSize;
+  type?: "submit" | "reset" | "button"
 };
 
 export default function Button({
@@ -21,6 +22,7 @@ export default function Button({
   disabled = false,
   circleButton = false,
   size = ButtonSize.Medium,
+  type
 }: ButtonProps) {
   var buttonPadding = "7px 7px";
   var buttonFontSize = "16px";
@@ -54,6 +56,7 @@ export default function Button({
         circleButton ? "rounded-full" : "rounded-[40px]"
       }`}
       onClick={onClick}
+      type={type && type}
     >
       {children}
     </button>

@@ -15,7 +15,7 @@ export default function MenuCarousel({className, activeSectionId, handleCarousel
       {Object.keys(response).length === 0 ? (
         <Loader />
       ) : (
-        <div className="flex w-full gap-12 overflow-x-auto scrollbar-hide">
+        <div className="flex w-full gap-8 overflow-x-auto scrollbar-hide">
           {response.sections.map((section) => (
             <MenuCarouselCard onClick={() => handleCarouselCardClick(section.id)} active={section.id === activeSectionId} title={section.name} image={section.images[0].image} key={section.id}/>
           ))}

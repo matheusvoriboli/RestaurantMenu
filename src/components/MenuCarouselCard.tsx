@@ -12,7 +12,7 @@ export default function MenuCarouselCard({
   title,
   image,
   active = true,
-  onClick
+  onClick,
 }: MenuCarouselCardProps) {
   const response = useAppSelector((state) => state.restaurant.value);
 
@@ -26,17 +26,23 @@ export default function MenuCarouselCard({
       className="flex flex-col items-center"
       onClick={onClick}
     >
-      <div className="relative overflow-hidden rounded-full bg-black h-20 w-20">
-        <Image
-          src={image}
-          alt="section-image"
-          className="object-cover"
-          fill
-          priority
-          sizes="100%"
-        />
+      <div style={
+        active
+          ? { border: `2px solid ${response.webSettings?.primaryColour}` }
+          : {}
+      } className="rounded-full p-[2px]">
+        <div className="relative overflow-hidden rounded-full bg-black h-20 w-20 ">
+          <Image
+            src={image}
+            alt="section-image"
+            className="object-cover border border-black"
+            fill
+            priority
+            sizes="100%"
+          />
+        </div>
       </div>
-      <p className="mt-2 mb-4">{title}</p>
+      <p className="mt-2 mb-4 text-main" style={{fontWeight: active ? 'bold' : 'normal'}}>{title}</p>
     </div>
   );
 }

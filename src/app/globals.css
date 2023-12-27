@@ -37,6 +37,25 @@
    }
  }
 
+ .side-menu {
+   position: fixed;
+   top: var(--nav-height);
+   bottom: 0;
+   right: 0;
+   width: 100vw;
+   max-width: 500px;
+   z-index: 100;
+   /* display: flex; */
+   pointer-events: none;
+   transition: all .3s ease-in-out;
+   transform: translateX(100%);
+ }
+ 
+ .side-menu-open {
+   transform: translateX(0);
+   pointer-events: auto;
+ }
+
 .main-bg {
    background-color: var(--primary);
 }
