@@ -35,7 +35,7 @@ export default function Modal({
     >
       <div className="flex items-end justify-center h-screen">
         <div
-          className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+          className="fixed inset-0 bg-gray-500 bg-opacity-50 transition-opacity"
           aria-hidden="true"
           onClick={onClose}
         ></div>
@@ -44,8 +44,8 @@ export default function Modal({
             fullScreen && "h-full w-full"
           }`}
         >
-          <div className="ms-auto absolute top-4 right-4 h-6 w-6 rounded-full bg-white flex items-center justify-center z-20">
-            <X onClick={onClose} className="" size={18} />
+          <div className="ms-auto absolute top-4 right-4 h-6 w-6 rounded-full bg-white flex items-center justify-center z-20 shadow">
+            <X onClick={onClose} size={18} />
           </div>
           {children}
         </div>
