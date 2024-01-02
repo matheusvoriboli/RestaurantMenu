@@ -1,15 +1,20 @@
 import { useAppSelector } from "@/redux/store";
-import { MagnifyingGlass } from "@phosphor-icons/react";
-import { createRef, useLayoutEffect, useRef, useState } from "react";
-import Input from "./Input";
+import {
+  RefObject,
+  createRef,
+  useLayoutEffect,
+  useRef,
+  useState
+} from "react";
 import MenuAccordion from "./MenuAccordion";
 import MenuCarousel from "./MenuCarousel";
+import SearchMenuItems from "./SearchMenuItems";
 
 export default function MenuContainer() {
   const restaurantResponse = useAppSelector((state) => state.restaurant.value);
   const menuResponse = useAppSelector((state) => state.menu.value);
   const sectionRefs = useRef<{
-    [key: string]: React.RefObject<HTMLDivElement>;
+    [key: string]: RefObject<HTMLDivElement>;
   }>({});
 
   const [intersectingSections, setIntersectingSections] = useState<number[]>(
@@ -70,11 +75,8 @@ export default function MenuContainer() {
         backgroundColor: restaurantResponse.webSettings?.backgroundColour,
       }}
     >
-      <div className="my-2 block lg:hidden ">
-        <Input
-          placeholder="Search menu items"
-          icon={<MagnifyingGlass className="text-custom-gray" />}
-        />
+      <div className="my-2 block lg:hidden relative">
+        <SearchMenuItems />
       </div>
       <MenuCarousel
         className="mt-6 mb-10"

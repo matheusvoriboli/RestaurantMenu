@@ -38,7 +38,7 @@ type Image = {
    available: boolean;
  };
  
- type Section = {
+ export type Section = {
    id: number;
    name: string;
    description: string | null;

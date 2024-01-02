@@ -1,11 +1,11 @@
 "use client";
 import Basket from "@/components/Basket";
 import Button from "@/components/Button";
-import Input from "@/components/Input";
 import MenuContainer from "@/components/MenuContainer";
 import Modal from "@/components/Modal";
+import SearchMenuItems from "@/components/SearchMenuItems";
 import { useAppSelector } from "@/redux/store";
-import { Dot, MagnifyingGlass } from "@phosphor-icons/react";
+import { Dot } from "@phosphor-icons/react";
 import Image from "next/image";
 import { useState } from "react";
 import { useMediaQuery } from "react-responsive";
@@ -31,10 +31,7 @@ export default function Menu() {
         <div className="custom-content-height flex flex-col items-center">
           <div className="lg:w-[1024px] h-full flex flex-col mb-8 w-full">
             <div className="lg:block hidden w-full lg:my-2">
-              <Input
-                placeholder="Search menu items"
-                icon={<MagnifyingGlass className="text-custom-gray" />}
-              />
+              <SearchMenuItems />
             </div>
             <div className="bg-background-default lg:py-8 lg:px-10 flex gap-6 h-full">
               <MenuContainer />
