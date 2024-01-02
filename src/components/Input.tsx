@@ -24,7 +24,7 @@ export default function Input({
   onChange,
 }: InputProps) {
   return (
-    <div className="relative">
+    <div className="relative w-full">
       {icon && (
         <div className="absolute top-0 left-0 h-full flex items-center pl-2">
           {icon}

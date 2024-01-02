@@ -1,8 +1,9 @@
 import { ButtonSize } from "@/enums/ButtonSize";
 import { useAppSelector } from "@/redux/store";
+import { ReactNode } from "react";
 
 type ButtonProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   onClick?: () => void;
   backgroundColor?: string;
   textColor?: string;
@@ -11,6 +12,8 @@ type ButtonProps = {
   circleButton?: boolean;
   size?: ButtonSize;
   type?: "submit" | "reset" | "button"
+  className?: string;
+  icon?: ReactNode;
 };
 
 export default function Button({
@@ -22,7 +25,9 @@ export default function Button({
   disabled = false,
   circleButton = false,
   size = ButtonSize.Medium,
-  type
+  type,
+  className,
+  icon
 }: ButtonProps) {
   var buttonPadding = "7px 7px";
   var buttonFontSize = "16px";
@@ -54,10 +59,15 @@ export default function Button({
       }}
       className={`flex justify-center items-center font-semibold ${fullScreen && "w-full"} ${
         circleButton ? "rounded-full" : "rounded-[40px]"
-      }`}
+      } ${className}}`}
       onClick={onClick}
       type={type && type}
     >
+      {icon && (
+        <div className="me-1">
+          {icon}
+        </div>
+      )}
       {children}
     </button>
   );

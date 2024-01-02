@@ -1,11 +1,12 @@
-import { useAppSelector } from "@/redux/store";
+import { toggleModalVisibility } from "@/redux/features/modal-slice";
+import { setCurrentItem } from "@/redux/features/order-slice";
+import { AppDispatch, useAppSelector } from "@/redux/store";
 import { Item } from "@/types/Menu";
-import { MagnifyingGlass } from "@phosphor-icons/react";
+import { MagnifyingGlass, X } from "@phosphor-icons/react";
 import Image from "next/image";
-import {
-   ChangeEvent,
-   useState
-} from "react";
+import { ChangeEvent, useState } from "react";
+import { useDispatch } from "react-redux";
+import Button from "./Button";
 import Input from "./Input";
 
 type SearchItemsResult = {
@@ -15,14 +16,17 @@ type SearchItemsResult = {
 };
 
 export default function SearchMenuItems() {
+  const [inputValue, setInputValue] = useState<string>("");
   const menuResponse = useAppSelector((state) => state.menu.value);
   const restaurantResponse = useAppSelector((state) => state.restaurant.value);
+  const dispatch = useDispatch<AppDispatch>();
   const [searchItemsResult, setSearchItemsResult] = useState<
     SearchItemsResult[]
   >([]);
 
   const searchMenuItems = (e: ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value;
+    setInputValue(searchValue);
     var newSearchItems = [] as SearchItemsResult[];
     if (searchValue !== "") {
       menuResponse?.sections?.forEach((section) => {
@@ -50,13 +54,37 @@ export default function SearchMenuItems() {
     setSearchItemsResult(newSearchItems);
   };
 
+  const clearInput = () => {
+    const event = {
+      target: {
+        value: "",
+      },
+    } as ChangeEvent<HTMLInputElement>;
+    setInputValue("");
+    searchMenuItems(event);
+  };
+
   return (
     <div className="relative">
-      <Input
-        placeholder="Search menu items"
-        icon={<MagnifyingGlass className="text-custom-gray" />}
-        onChange={searchMenuItems}
-      />
+      <div className="flex gap-3">
+        <Input
+          placeholder="Search menu items"
+          icon={<MagnifyingGlass className="text-custom-gray" />}
+          onChange={searchMenuItems}
+          value={inputValue}
+        />
+        {inputValue?.length > 0 && (
+          <Button
+            backgroundColor="transparent"
+            textColor="#121212"
+            className="w-fit"
+            onClick={clearInput}
+            icon={<X weight="bold" color="#121212"/>}
+          >
+            Clear
+          </Button>
+        )}
+      </div>
       {searchItemsResult?.length > 0 && (
         <div className="bg-background-subtle left-0 w-full z-10 mt-2 px-2 absolute max-h-96 overflow-y-auto rounded-lg shadow-lg">
           {searchItemsResult?.map((section, index) => {
@@ -74,6 +102,10 @@ export default function SearchMenuItems() {
                   <div
                     key={item.id}
                     className="flex justify-between p-3 border-t border-inactive-background w-full"
+                    onClick={() => {
+                      dispatch(toggleModalVisibility());
+                      dispatch(setCurrentItem(item));
+                    }}
                   >
                     <div>
                       <h1>{item.name}</h1>
