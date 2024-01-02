@@ -62,9 +62,10 @@
 .primary {
    color: var(--primary-bg);
 }
-.primary-hover {
+.primary:hover {
    color: var(--primary-hover);
 }
+
 .nav-bg {
    background-color: var(--nav-bg);
 }

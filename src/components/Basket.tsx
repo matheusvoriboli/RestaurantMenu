@@ -61,9 +61,19 @@ export default function Basket() {
               >
                 <div className="flex flex-col p-1">
                   <span className="text-main">{order?.item?.name}</span>
-                  <span className="text-inactive">
-                    {order?.selectedModifier?.name}
-                  </span>
+                  <div className="flex">
+                    {order?.selectedModifier && (
+                      <>
+                        <span className="text-inactive me-1">
+                          {order?.selectedModifier?.name}
+                        </span>
+                        <span className="text-inactive">
+                          (+{restaurantResponse.currency}{" "}
+                          {order?.selectedModifier?.price.toFixed(2)})
+                        </span>
+                      </>
+                    )}
+                  </div>
                   <div className="flex items-center gap-1 mt-2 ms-1">
                     <Button
                       size={ButtonSize.Small}

@@ -79,8 +79,8 @@ export default function SearchMenuItems() {
             textColor="#121212"
             className="w-fit"
             onClick={clearInput}
-            icon={<X weight="bold" color="#121212"/>}
           >
+            <X weight="bold" color="#121212" className="me-1"/>
             Clear
           </Button>
         )}
