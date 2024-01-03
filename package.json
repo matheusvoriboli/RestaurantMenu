@@ -13,6 +13,7 @@
   "dependencies": {
     "@phosphor-icons/react": "^2.0.15",
     "@reduxjs/toolkit": "^2.0.1",
+    "flag-icons": "^7.1.0",
     "i18next": "^23.7.15",
     "next": "14.0.4",
     "react": "^18",

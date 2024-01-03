@@ -3,6 +3,7 @@ import { List } from "@phosphor-icons/react";
 import Link from "next/link";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import LanguageDropdown from "./LanguageDropdown";
 
 type MobileHeaderProps = {
   activePage: string;
@@ -16,6 +17,9 @@ export default function MobileHeader({ activePage }: MobileHeaderProps) {
     <div>
       <header className="flex relative items-center justify-center p-5 main-bg">
         <h1 className="text-white">{t(activePage)}</h1>
+        <div className="absolute left-4">
+          <LanguageDropdown />
+        </div>
         <button
           onClick={() => setIsOpen((state) => !state)}
           className="focus:outline-none absolute right-4"

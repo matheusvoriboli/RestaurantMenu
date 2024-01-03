@@ -1,6 +1,7 @@
 import { Pages } from "@/utils/Pages";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
+import LanguageDropdown from "./LanguageDropdown";
 
 type DesktopHeaderProps = {
   activePage: string;
@@ -9,7 +10,7 @@ type DesktopHeaderProps = {
 export default function DesktopHeader({ activePage }: DesktopHeaderProps) {
   const { t } = useTranslation();
   return (
-    <header className="header main-bg flex justify-center gap-[6%]">
+    <header className="header main-bg flex justify-center gap-[6%] relative">
       {Object.values(Pages).map((page, index) => (
         <div key={index}>
           <Link
@@ -22,6 +23,9 @@ export default function DesktopHeader({ activePage }: DesktopHeaderProps) {
           </Link>
         </div>
       ))}
+      <div className="absolute right-4">
+        <LanguageDropdown />
+      </div>
     </header>
   );
 }

@@ -39,7 +39,7 @@ export default function Basket() {
     checkoutResponse.forEach((item) => {
       totalValue += item.price;
     });
-    return `${restaurantResponse.currency} ${totalValue.toFixed(2)}`;
+    return `${t(restaurantResponse.currency)} ${totalValue.toFixed(2)}`;
   };
 
   return (
@@ -70,7 +70,7 @@ export default function Basket() {
                           {order?.selectedModifier?.name}
                         </span>
                         <span className="text-inactive">
-                          (+{restaurantResponse.currency}{" "}
+                          (+{t(restaurantResponse.currency)}{" "}
                           {order?.selectedModifier?.price.toFixed(2)})
                         </span>
                       </>
@@ -101,7 +101,7 @@ export default function Basket() {
                   </div>
                 </div>
                 <div className="">
-                  {restaurantResponse.currency} {order?.price.toFixed(2)}
+                  {t(restaurantResponse.currency)} {order?.price.toFixed(2)}
                 </div>
               </li>
             ))}

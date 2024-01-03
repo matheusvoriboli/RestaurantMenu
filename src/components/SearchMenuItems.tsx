@@ -5,6 +5,7 @@ import { Item } from "@/types/Menu";
 import { MagnifyingGlass, X } from "@phosphor-icons/react";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import Button from "./Button";
 import Input from "./Input";
@@ -16,6 +17,7 @@ type SearchItemsResult = {
 };
 
 export default function SearchMenuItems() {
+  const { t } = useTranslation();
   const [inputValue, setInputValue] = useState<string>("");
   const menuResponse = useAppSelector((state) => state.menu.value);
   const restaurantResponse = useAppSelector((state) => state.restaurant.value);
@@ -110,7 +112,7 @@ export default function SearchMenuItems() {
                     <div>
                       <h1>{item.name}</h1>
                       <h1>
-                        {restaurantResponse.currency} {item.price.toFixed(2)}
+                        {t(restaurantResponse.currency)} {item.price.toFixed(2)}
                       </h1>
                     </div>
                     <div className="relative overflow-hidden rounded h-12 w-28 ">

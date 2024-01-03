@@ -98,7 +98,7 @@ const MenuAccordion = forwardRef<HTMLDivElement, MenuAccordionProps>(
                       {t(item.description)}
                     </p>
                     <p className="text-sm text-secondary font-semibold">
-                      {currency} {item.price.toFixed(2)}
+                      {t(currency)} {item.price.toFixed(2)}
                     </p>
                   </div>
                   {item?.images?.length > 0 && (

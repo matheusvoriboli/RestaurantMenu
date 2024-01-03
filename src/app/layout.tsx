@@ -12,7 +12,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html>
       <ReduxProvider>
         <body className={roboto.className}>
           <AppWrapper>

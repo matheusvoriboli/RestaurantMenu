@@ -100,7 +100,7 @@ export default function SelectedItemContainer() {
             <Button fullScreen onClick={handleAddToOrder} disabled={isAddOrderButtonDisabled()}>
               {t('Add to order')}
               <Dot size={21} weight="bold" />
-              {restaurantResponse.currency} {(selectedModifier ? selectedModifier.price * quantity : orderResponse?.currentItem?.price * quantity).toFixed(2)}
+              {t(restaurantResponse.currency)} {(selectedModifier ? selectedModifier.price * quantity : orderResponse?.currentItem?.price * quantity).toFixed(2)}
             </Button>
           </div>
         </div>

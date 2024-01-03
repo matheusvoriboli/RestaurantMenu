@@ -6,11 +6,13 @@ import {
   useRef,
   useState
 } from "react";
+import { useTranslation } from "react-i18next";
 import MenuAccordion from "./MenuAccordion";
 import MenuCarousel from "./MenuCarousel";
 import SearchMenuItems from "./SearchMenuItems";
 
 export default function MenuContainer() {
+  const { t } = useTranslation();
   const restaurantResponse = useAppSelector((state) => state.restaurant.value);
   const menuResponse = useAppSelector((state) => state.menu.value);
   const sectionRefs = useRef<{
@@ -92,7 +94,7 @@ export default function MenuContainer() {
               key={section.id}
               title={section.name}
               items={section.items}
-              currency={restaurantResponse?.currency}
+              currency={t(restaurantResponse?.currency)}
               ref={sectionRefs.current[section.id]}
             />
           );
