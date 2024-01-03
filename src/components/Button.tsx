@@ -12,6 +12,7 @@ type ButtonProps = {
   size?: ButtonSize;
   type?: "submit" | "reset" | "button";
   className?: string;
+  dataTestId?: string;
 };
 
 export default function Button({
@@ -25,6 +26,7 @@ export default function Button({
   size = ButtonSize.Medium,
   type,
   className,
+  dataTestId
 }: ButtonProps) {
   var buttonPadding = "7px 7px";
   var buttonFontSize = "16px";
@@ -54,6 +56,7 @@ export default function Button({
         padding: buttonPadding,
         fontSize: buttonFontSize,
       }}
+      data-testid={dataTestId}
       className={`
       flex justify-center items-center font-semibold
       ${fullScreen && "w-full"} 

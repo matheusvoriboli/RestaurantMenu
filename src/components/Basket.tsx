@@ -78,6 +78,7 @@ export default function Basket() {
                     <Button
                       size={ButtonSize.Small}
                       circleButton
+                      dataTestId="decrease-quantity"
                       onClick={() =>
                         updateBasketItem(order, order?.quantity - 1)
                       }
@@ -88,6 +89,7 @@ export default function Basket() {
                     <Button
                       size={ButtonSize.Small}
                       circleButton
+                      dataTestId="increase-quantity"
                       onClick={() =>
                         updateBasketItem(order, order?.quantity + 1)
                       }
