@@ -38,7 +38,7 @@ export const checkout = createSlice({
         if(action.payload.selectedModifier) {
           // Order with modifier
           const index = state.value.findIndex(
-            (item) => item.item.id === action.payload.selectedModifier?.id
+            (item) => item.selectedModifier?.id === action.payload.selectedModifier?.id
           );
           addOrder(index, state.value, action.payload);
         } else {

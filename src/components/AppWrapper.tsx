@@ -6,7 +6,6 @@ import { Pages } from "@/utils/Pages";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useMediaQuery } from "react-responsive";
 import DesktopHeader from "./DesktopHeader";
 import Loader from "./Loader";
 import MobileHeader from "./MobileHeader";
@@ -19,8 +18,6 @@ export default function AppWrapper({
   const dispatch = useDispatch<AppDispatch>();
   const restaurantResponse = useAppSelector((state) => state.restaurant.value);
   const [activePage, setActivePage] = useState<string>(Pages.MENU.name);
-  const isModalVisible = useAppSelector((state) => state.modal.value);
-  const isLargeScreen = useMediaQuery({ minWidth: 481 }); // Min width of the modal is 480px
 
   useEffect(() => {
     dispatch(fetchRestaurantDetails());
