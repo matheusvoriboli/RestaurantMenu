@@ -4,7 +4,7 @@ import MenuCarouselCard from "./MenuCarouselCard";
 
 type MenuCarouselProps = {
   className?: string;
-  activeSectionId?: number;
+  activeSectionId: number;
   handleCarouselCardClick: (id: number) => void;
 };
 

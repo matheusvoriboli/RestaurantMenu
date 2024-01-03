@@ -15,13 +15,12 @@ export default function MenuContainer() {
   const { t } = useTranslation();
   const restaurantResponse = useAppSelector((state) => state.restaurant.value);
   const menuResponse = useAppSelector((state) => state.menu.value);
+  const [intersectingSections, setIntersectingSections] = useState<number[]>(
+    []
+  ); // Need to create an array of intersecting sections to determine which section is active in the carousel and to know wich one was the last one intersected to scroll to it
   const sectionRefs = useRef<{
     [key: string]: RefObject<HTMLDivElement>;
   }>({});
-
-  const [intersectingSections, setIntersectingSections] = useState<number[]>(
-    []
-  );
 
   useLayoutEffect(() => {
     menuResponse?.sections?.forEach((section) => {
@@ -34,10 +33,10 @@ export default function MenuContainer() {
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
-            setIntersectingSections((prev) => [...prev, section.id]);
+            setIntersectingSections((state) => [...state, section.id]);
           } else {
-            setIntersectingSections((prev) =>
-              prev.filter((id) => id !== section.id)
+            setIntersectingSections((state) =>
+              state.filter((id) => id !== section.id)
             );
           }
         },
@@ -61,9 +60,7 @@ export default function MenuContainer() {
   }, [menuResponse?.sections]);
 
   const lastIntersectingSection =
-    intersectingSections.length > 0
-      ? intersectingSections[intersectingSections.length - 1]
-      : null;
+    intersectingSections[intersectingSections.length - 1];
 
   const handleCarouselCardClick = (sectionId: number) => {
     const ref = sectionRefs.current[sectionId];
@@ -82,9 +79,7 @@ export default function MenuContainer() {
       </div>
       <MenuCarousel
         className="mt-6 mb-10"
-        activeSectionId={
-          lastIntersectingSection !== null ? lastIntersectingSection : undefined
-        }
+        activeSectionId={lastIntersectingSection}
         handleCarouselCardClick={handleCarouselCardClick}
       />
       <div className="flex flex-col gap-8">
