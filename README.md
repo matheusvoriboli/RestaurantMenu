@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## RESTAURANT MENU APP
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The project was built using and App Wrapper component outside the general elements cause i needed to use some informations that came from redux to set initial css variables and data for the project.
 
-## Learn More
+I have defined some css variables according to the information requested by the provided endpoint.
 
-To learn more about Next.js, take a look at the following resources:
+I am using Redux to manage the global state and have the following slices:
+   - checkout: Where i am defining the selected elements by the user
+   - menu: All the data here is defined through an endpoint request made in the beggining of the app ( Defines the menu informations )
+   - modal: Slice to toggle the component and get the modal visibility
+   - order: Just set the current item that i'm adding to my basket
+   - restaurant: All the data here is also defined by an endpoint request made in the beggining of the app ( Defines the restaurant informations )
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+In the app you should be able to select english or portuguese as the main language. i am setting the initial language using the response that i got from the restaurant endpoint, where they pass the locale. 
+For that translations i'm using i18next and some other tools. Besides that i've defined a locale dictionary to translate the phrases and words from the app.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+I've bult some unit tests for some components using Jest
 
-## Deploy on Vercel
+# Install the app
+   1. Clone the repository: `git clone https://github.com/matheusvoriboli/restaurant-menu.git`
+   2. Enter in the directory: `cd restaurant-menu`
+   3. Install the dependencies
+   4. Run the projeto: `npm run dev`
+   5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Run the tests
+   1. Inside the directory run: `npm test`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
