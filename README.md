@@ -7,11 +7,11 @@ The project was built using and App Wrapper component outside the general elemen
 I have defined some css variables according to the information requested by the provided endpoint.
 
 I am using Redux to manage the global state and have the following slices:
-   - checkout: Where i am defining the selected elements by the user
-   - menu: All the data here is defined through an endpoint request made in the beggining of the app ( Defines the menu informations )
-   - modal: Slice to toggle the component and get the modal visibility
-   - order: Just set the current item that i'm adding to my basket
-   - restaurant: All the data here is also defined by an endpoint request made in the beggining of the app ( Defines the restaurant informations )
+   - **checkout**: Where i am defining the selected elements by the user
+   - *menu*: All the data here is defined through an endpoint request made in the beggining of the app ( Defines the menu informations )
+   - *modal*: Slice to toggle the component and get the modal visibility
+   - *order*: Just set the current item that i'm adding to my basket
+   - *restaurant*: All the data here is also defined by an endpoint request made in the beggining of the app ( Defines the restaurant informations )
 
 In the app you should be able to select english or portuguese as the main language. i am setting the initial language using the response that i got from the restaurant endpoint, where they pass the locale. 
 For that translations i'm using i18next and some other tools. Besides that i've defined a locale dictionary to translate the phrases and words from the app.
