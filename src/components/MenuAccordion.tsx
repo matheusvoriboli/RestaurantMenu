@@ -88,8 +88,8 @@ const MenuAccordion = forwardRef<HTMLDivElement, MenuAccordionProps>(
                   dispatch(setCurrentItem(item));
                 }}
               >
-                <div className="flex justify-between">
-                  <div className="flex flex-col w-6/12">
+                <div className="flex justify-between gap-8">
+                  <div className="flex flex-col flex-1">
                     <div className="flex items-center">
                       {numberOfOrderedItems(item)}
                       <p className="text-main">{item.name}</p>

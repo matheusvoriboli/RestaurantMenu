@@ -3,37 +3,34 @@ import { fetchMenuDetails } from "@/redux/features/menu-slice";
 import { fetchRestaurantDetails } from "@/redux/features/restaurant-slice";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { Pages } from "@/utils/Pages";
-import i18n from 'i18next';
+import i18n from "i18next";
 import { usePathname } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
-import { initReactI18next } from 'react-i18next';
+import { initReactI18next, useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import enTranslations from '../locales/en/translations.json';
-import ptBRTranslations from '../locales/pt/translations.json';
+import enTranslations from "../locales/en/translations.json";
+import ptBRTranslations from "../locales/pt/translations.json";
+import '../services/i18n';
 import DesktopHeader from "./DesktopHeader";
 import Loader from "./Loader";
 import MobileHeader from "./MobileHeader";
 
-// Initialize i18next
-i18n
-  .use(initReactI18next)
-  .init({
-    resources: {
-      en: {
-        translation: enTranslations
-      },
-      'pt-BR': {
-        translation: ptBRTranslations
-      }
+i18n.use(initReactI18next).init({
+  resources: {
+    en: {
+      translation: enTranslations,
     },
-    lng: 'en', // Default language
-    fallbackLng: 'en', // Use English if the current language translations are not available
-    interpolation: {
-      escapeValue: false
-    }
-  });
+    "pt-BR": {
+      translation: ptBRTranslations,
+    },
+  },
+  lng: "en",
+  fallbackLng: "en",
+  interpolation: {
+    escapeValue: false,
+  },
+});
 
-  
 export default function AppWrapper({
   children,
 }: {
@@ -42,6 +39,7 @@ export default function AppWrapper({
   const dispatch = useDispatch<AppDispatch>();
   const restaurantResponse = useAppSelector((state) => state.restaurant.value);
   const [activePage, setActivePage] = useState<string>(Pages.MENU.name);
+  const { ready } = useTranslation();
 
   useEffect(() => {
     if (restaurantResponse.locale) {
@@ -62,6 +60,8 @@ export default function AppWrapper({
       }
     });
   }, [pathname]);
+
+  if(!ready) return (<Loader />);
 
   return (
     <Suspense fallback={<Loader />}>
