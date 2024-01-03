@@ -24,7 +24,7 @@ export default function ModifierContainer({
       </div>
       <ul>
         {modifier.items.map((item) => (
-          <li key={item.id} className="py-4 px-6 flex justify-between items-center">
+          <li key={item.id} className="py-4 px-6 flex justify-between items-center" onClick={() => setSelectedModifier(item)}>
             <div className="flex flex-col">
                <span className="text-main font-semibold">{item.name}</span>
                <span className="text-secondary">{item.price.toFixed(2)}</span>
