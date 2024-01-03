@@ -3,10 +3,12 @@ import { updateOrderItem } from "@/redux/features/checkout-slice";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { CheckoutItem } from "@/types/Checkout";
 import { Minus, Plus } from "@phosphor-icons/react";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import Button from "./Button";
 
 export default function Basket() {
+  const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
   const checkoutResponse = useAppSelector((state) => state.checkout.value);
   const restaurantResponse = useAppSelector((state) => state.restaurant.value);
@@ -43,11 +45,11 @@ export default function Basket() {
   return (
     <div className="lg:bg-background-default bg-white lg:shadow lg:h-fit h-full min-w-80 relative">
       <div className="p-5 flex justify-center border-b lg:border-b-0 border-b-inactive-background">
-        <h1 className="text-main text-xl font-semibold">Carrinho</h1>
+        <h1 className="text-main text-xl font-semibold">{t('Basket')}</h1>
       </div>
       <div className="bg-white">
         {checkoutResponse.length === 0 ? (
-          <p className="p-5">Seu carrinho está vazio</p>
+          <p className="p-5">{t('Your basket is empty')}</p>
         ) : (
           <ul>
             {checkoutResponse.map((order) => (
@@ -120,7 +122,7 @@ export default function Basket() {
       )}
       <div className="lg:hidden bg-[rgba(255,255,255,0.3)] fixed bottom-0 pb-6 backdrop-blur-sm flex flex-col justify-between pt-3 gap-4 w-full px-2 py-4">
         <Button fullScreen onClick={() => {}}>
-          Checkout now
+          {t('Checkout now')}
         </Button>
       </div>
     </div>

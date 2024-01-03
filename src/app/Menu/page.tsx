@@ -8,9 +8,11 @@ import { useAppSelector } from "@/redux/store";
 import { Dot } from "@phosphor-icons/react";
 import Image from "next/image";
 import { useState } from "react";
+import { useTranslation } from 'react-i18next';
 import { useMediaQuery } from "react-responsive";
 
 export default function Menu() {
+  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const restaurantResponse = useAppSelector((state) => state.restaurant.value);
   const checkoutResponse = useAppSelector((state) => state.checkout.value);
@@ -49,7 +51,7 @@ export default function Menu() {
                   }}
                   className="underline font-bold"
                 >
-                  View Allergy Information
+                  {t('View allergy information')}
                 </h1>
               </div>
             </div>
@@ -59,7 +61,7 @@ export default function Menu() {
         {checkoutResponse.length > 0 && (
           <div className="lg:hidden bg-[rgba(255,255,255,0.3)] fixed bottom-0 pb-6 backdrop-blur-sm flex flex-col justify-between pt-3 w-full px-4 gap-4">
             <Button onClick={() => setIsModalOpen(true)}>
-              <h1 className="text-white text-xl font-semibold">Your Basket</h1>
+              <h1 className="text-white text-xl font-semibold">{t('Your basket')}</h1>
               <Dot color="white" weight="bold" size={24} />
               <h1 className="text-white text-xl font-semibold">
                 {checkoutResponse.length}{" "}

@@ -5,6 +5,7 @@ import { Item } from "@/types/Menu";
 import { CaretDown } from "@phosphor-icons/react";
 import Image from "next/image";
 import { forwardRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import Modal from "./Modal";
@@ -18,6 +19,7 @@ type MenuAccordionProps = {
 
 const MenuAccordion = forwardRef<HTMLDivElement, MenuAccordionProps>(
   ({ items, title, currency = "R$" }: MenuAccordionProps, ref) => {
+    const { t } = useTranslation();
     const [accordionOpened, setAccordionOpened] = useState(true);
     const dispatch = useDispatch<AppDispatch>();
     const isModalVisible = useAppSelector((state) => state.modal.value);
@@ -33,11 +35,13 @@ const MenuAccordion = forwardRef<HTMLDivElement, MenuAccordionProps>(
               quantity += checkoutItem.quantity;
             }
           });
-          return (
-            <span className="main-bg text-white px-1 rounded text-sm me-2">
-              {quantity.toString()}
-            </span>
-          );
+          if (quantity > 0) {
+            return (
+              <span className="main-bg text-white px-1 rounded text-sm me-2">
+                {quantity.toString()}
+              </span>
+            );
+          }
         } else {
           const itemInCheckout = checkoutResponse.find(
             (checkoutItem) => checkoutItem.item.id === item.id
@@ -63,9 +67,9 @@ const MenuAccordion = forwardRef<HTMLDivElement, MenuAccordionProps>(
           <SelectedItemContainer />
         </Modal>
         <div className="flex flex-col gap-6" ref={ref}>
-          <div className="flex justify-between">
-            <h1 className="text-2xl font-semibold">{title}</h1>
-            <button onClick={() => setAccordionOpened((state) => !state)}>
+          <div className="flex justify-between cursor-pointer" onClick={() => setAccordionOpened((state) => !state)}>
+            <h1 className="text-2xl font-semibold">{t(title)}</h1>
+            <button>
               <CaretDown
                 className={`w-6 h-6 transform transition-all ${
                   !accordionOpened ? "rotate-180" : ""
@@ -77,7 +81,7 @@ const MenuAccordion = forwardRef<HTMLDivElement, MenuAccordionProps>(
             accordionOpened &&
             items?.map((item) => (
               <div
-                className="flex flex-col"
+                className="flex flex-col cursor-pointer"
                 key={item.id}
                 onClick={() => {
                   dispatch(toggleModalVisibility());
@@ -91,7 +95,7 @@ const MenuAccordion = forwardRef<HTMLDivElement, MenuAccordionProps>(
                       <p className="text-main">{item.name}</p>
                     </div>
                     <p className="text-sm text-secondary font-extralight overflow-hidden clip-item-description-text">
-                      {item.description}
+                      {t(item.description)}
                     </p>
                     <p className="text-sm text-secondary font-semibold">
                       {currency} {item.price.toFixed(2)}

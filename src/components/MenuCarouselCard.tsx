@@ -1,5 +1,6 @@
 import { useAppSelector } from "@/redux/store";
 import Image from "next/image";
+import { useTranslation } from 'react-i18next';
 
 type MenuCarouselCardProps = {
   title: string;
@@ -14,6 +15,7 @@ export default function MenuCarouselCard({
   active = true,
   onClick,
 }: MenuCarouselCardProps) {
+  const { t } = useTranslation();
   const response = useAppSelector((state) => state.restaurant.value);
 
   return (
@@ -23,7 +25,7 @@ export default function MenuCarouselCard({
           ? { borderBottom: `2px solid ${response.webSettings?.primaryColour}` }
           : {}
       }
-      className="flex flex-col items-center"
+      className="flex flex-col items-center cursor-pointer"
       onClick={onClick}
     >
       <div style={
@@ -42,7 +44,7 @@ export default function MenuCarouselCard({
           />
         </div>
       </div>
-      <p className="mt-2 mb-4 text-main" style={{fontWeight: active ? 'bold' : 'normal'}}>{title}</p>
+      <p className="mt-2 mb-4 text-main" style={{fontWeight: active ? 'bold' : 'normal'}}>{t(title)}</p>
     </div>
   );
 }

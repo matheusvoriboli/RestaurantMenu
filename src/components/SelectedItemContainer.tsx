@@ -1,3 +1,4 @@
+"use client"
 import { addOrderItem } from "@/redux/features/checkout-slice";
 import { toggleModalVisibility } from "@/redux/features/modal-slice";
 import { AppDispatch, useAppSelector } from "@/redux/store";
@@ -5,12 +6,15 @@ import { ModifierItem } from "@/types/Menu";
 import { Dot, Minus, Plus } from "@phosphor-icons/react";
 import Image from "next/image";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import Button from "./Button";
 import Loader from "./Loader";
 import ModifierContainer from "./ModifierContainer";
 
+
 export default function SelectedItemContainer() {
+  const { t } = useTranslation();
   const [selectedModifier, setSelectedModifier] = useState<ModifierItem>();
   const [quantity, setQuantity] = useState<number>(1);
   const orderResponse = useAppSelector((state) => state.order.value);
@@ -63,10 +67,10 @@ export default function SelectedItemContainer() {
           <div className="overflow-hidden overflow-y-auto scrollbar-hide pb-9 xsm:pb-[140px]">
             <div className="p-4">
               <h1 className="text-2xl font-semibold text-main">
-                {orderResponse?.currentItem?.name}
+                {t(orderResponse?.currentItem?.name)}
               </h1>
               <p className="font-light text-secondary">
-                {orderResponse?.currentItem?.description}
+                {t(orderResponse?.currentItem?.description)}
               </p>
             </div>
             {orderResponse?.currentItem?.modifiers?.map((modifier) => (
@@ -94,7 +98,7 @@ export default function SelectedItemContainer() {
               </Button>
             </div>
             <Button fullScreen onClick={handleAddToOrder} disabled={isAddOrderButtonDisabled()}>
-              Add to Order
+              {t('Add to order')}
               <Dot size={21} weight="bold" />
               {restaurantResponse.currency} {(selectedModifier ? selectedModifier.price * quantity : orderResponse?.currentItem?.price * quantity).toFixed(2)}
             </Button>

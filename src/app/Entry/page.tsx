@@ -3,8 +3,10 @@ import Button from "@/components/Button";
 import Input from "@/components/Input";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
+import { useTranslation } from 'react-i18next';
 
 export default function Entry() {
+  const { t } = useTranslation();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -18,13 +20,13 @@ export default function Entry() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-12">
       <div className="max-w-lg w-full ">
         <div>
-          <h2 className="text-center text-2xl font-bold text-main">Sign in</h2>
+          <h2 className="text-center text-2xl font-bold text-main">{t('Sign in')} </h2>
         </div>
         <form className="mt-8" onSubmit={handleLogin}>
           <div>
             <div>
               <label htmlFor="username" className="sr-only">
-                Username
+                {t('Username')}
               </label>
               <Input
                 id="username"
@@ -37,7 +39,7 @@ export default function Entry() {
             </div>
             <div className="my-2">
               <label htmlFor="password" className="sr-only">
-                Password
+                {t('Password')}
               </label>
               <Input
                 id="password"
@@ -56,7 +58,7 @@ export default function Entry() {
               fullScreen
               disabled={username.length === 0 || password.length === 0}
             >
-              Sign in
+              {t('Sign in')}
             </Button>
           </div>
         </form>

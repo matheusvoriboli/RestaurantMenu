@@ -1,11 +1,13 @@
 import { Pages } from "@/utils/Pages";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 type DesktopHeaderProps = {
   activePage: string;
 };
 
 export default function DesktopHeader({ activePage }: DesktopHeaderProps) {
+  const { t } = useTranslation();
   return (
     <header className="header main-bg flex justify-center gap-[6%]">
       {Object.values(Pages).map((page, index) => (
@@ -16,7 +18,7 @@ export default function DesktopHeader({ activePage }: DesktopHeaderProps) {
               activePage === page.name ? "font-bold" : "font-normal"
             }`}
           >
-            {page.name}
+            {t(page.name)}
           </Link>
         </div>
       ))}

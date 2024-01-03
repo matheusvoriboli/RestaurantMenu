@@ -13,8 +13,6 @@ export default function ModifierContainer({
   selectedModifier
 }: ModifierContainerProps) {
 
-  // const [selectedModifier, setSelectedModifier] = useState<ModifierItem>();
-
   return (
     <div className="flex flex-col border-background-subtle border-b-[1px] border-t-[1px]">
       <div className="bg-background-default py-4 px-6">

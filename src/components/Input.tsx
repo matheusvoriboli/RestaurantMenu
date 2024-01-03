@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { useTranslation } from 'react-i18next';
 
 type InputProps = {
   type?: string;
@@ -23,6 +24,7 @@ export default function Input({
   value,
   onChange,
 }: InputProps) {
+  const { t } = useTranslation();
   return (
     <div className="relative w-full">
       {icon && (
@@ -37,7 +39,7 @@ export default function Input({
         value={value}
         onChange={onChange}
         type={type}
-        placeholder={placeholder}
+        placeholder={placeholder && t(placeholder)}
         className={` border-custom-gray border-[1px] rounded-md w-full p-2 focus:outline-none focus:ring-main focus:border-main ${
           icon && "pl-8"
         } ${className}`}
