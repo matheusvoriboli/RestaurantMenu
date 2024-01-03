@@ -67,7 +67,7 @@ const MenuAccordion = forwardRef<HTMLDivElement, MenuAccordionProps>(
           <SelectedItemContainer />
         </Modal>
         <div className="flex flex-col gap-6" ref={ref}>
-          <div className="flex justify-between cursor-pointer" onClick={() => setAccordionOpened((state) => !state)}>
+          <div data-testid="toggle-accordion" className="flex justify-between cursor-pointer" onClick={() => setAccordionOpened((state) => !state)}>
             <h1 className="text-2xl font-semibold">{t(title)}</h1>
             <button>
               <CaretDown

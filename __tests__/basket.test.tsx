@@ -8,8 +8,8 @@ import { mockRestaurantData } from "./mocks/mockRestaurantData";
 
 describe("Basket", () => {
   it("renders without crashing", () => {
-    const { getByText } = render(<Basket />)
-    expect(getByText("Carrinho")).toBeInTheDocument();
+    const { getByTestId } = render(<Basket />)
+    expect(getByTestId("checkout-button")).toBeInTheDocument();
   });
 
   it("calls updateBasketItem when button is clicked", () => {
@@ -24,9 +24,10 @@ describe("Basket", () => {
       }),
     });
     const dispatchSpy = jest.spyOn(store, "dispatch");
+    
     // On this example i need to pass this exact store to the Provider
     const { getAllByTestId } = render(
-      <Provider store={store}>
+      <Provider store={store}> 
         <Basket />
       </Provider>
     );

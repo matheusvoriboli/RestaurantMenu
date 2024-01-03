@@ -121,7 +121,7 @@ export default function Basket() {
         </div>
       )}
       <div className="lg:hidden bg-[rgba(255,255,255,0.3)] fixed bottom-0 pb-6 backdrop-blur-sm flex flex-col justify-between pt-3 gap-4 w-full px-2 py-4">
-        <Button fullScreen onClick={() => {}}>
+        <Button dataTestId="checkout-button" fullScreen onClick={() => {}}>
           {t('Checkout now')}
         </Button>
       </div>

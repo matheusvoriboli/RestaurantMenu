@@ -7,10 +7,8 @@ const initialState = {
 
 const addOrder = (index: number, stateValue: CheckoutItem[] , actionPayload: CheckoutItem) => {
   if (index !== -1) {
-    // Item exists, update quantity
     stateValue[index].quantity += actionPayload.quantity;
   } else {
-    // Item does not exist, add to array
     stateValue.push(actionPayload);
   }
 }
@@ -23,9 +21,6 @@ const updateOrder = (index: number, item: CheckoutItem, stateValue: CheckoutItem
     item.price = actionPayload.price;
   }
 }
-  
-
-// const updateOrder = () => {}
 
 export const checkout = createSlice({
   name: "checkout",
@@ -36,13 +31,11 @@ export const checkout = createSlice({
         state.value.push(action.payload as CheckoutItem);
       } else {
         if(action.payload.selectedModifier) {
-          // Order with modifier
           const index = state.value.findIndex(
             (item) => item.selectedModifier?.id === action.payload.selectedModifier?.id
           );
           addOrder(index, state.value, action.payload);
         } else {
-          // Order without modifier
           const index = state.value.findIndex(
             (item) => item.item.id === action.payload.item.id
           );

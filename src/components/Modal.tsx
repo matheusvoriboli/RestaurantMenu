@@ -44,7 +44,7 @@ export default function Modal({
             fullScreen && "h-full w-full"
           }`}
         >
-          <div className="ms-auto absolute top-4 right-4 h-6 w-6 rounded-full bg-white flex items-center justify-center z-20 shadow cursor-pointer">
+          <div data-testid="close-modal" className="ms-auto absolute top-4 right-4 h-6 w-6 rounded-full bg-white flex items-center justify-center z-20 shadow cursor-pointer">
             <X onClick={onClose} size={18} />
           </div>
           {children}

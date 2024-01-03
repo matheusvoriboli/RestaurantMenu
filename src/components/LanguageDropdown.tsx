@@ -12,6 +12,7 @@ export default function LanguageDropdown() {
         <div className="flex items-center">
           <span className="me-2 text-sm text-nowrap hidden lg:block">{t('Select your language')}</span>
           <select
+            data-testid="language-select"
             id="countries"
             className="bg-inactive-background border border-inactive text-gray-900 text-sm rounded-lg block w-full p-1 focus:outline-none focus:ring-0"
             onChange={(e) => changeLanguage(e.target.value)}

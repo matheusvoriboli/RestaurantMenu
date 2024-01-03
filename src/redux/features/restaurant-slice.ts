@@ -1,17 +1,6 @@
-// import { BookingState } from "@/interfaces/BookingState";
 import { getRestaurantDetails } from "@/services/restaurantService";
 import { Restaurant } from "@/types/Restaurant";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-// import Swal from "sweetalert2";
-
-// type InitialState = {
-//   value: BookingState[];
-// };
-
-// const initialState = {
-//   value: [] as BookingState[],
-//   value: [] as BookingState[],
-// } as InitialState;
 
 export const fetchRestaurantDetails = createAsyncThunk(
   "restaurant/getRestaurantDetails",
