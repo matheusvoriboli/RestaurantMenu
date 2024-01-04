@@ -12,7 +12,7 @@ import { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { useMediaQuery } from "react-responsive";
 
-export default function Menu() {
+export default function MenuWrapper() {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const restaurantResponse = useAppSelector((state) => state.restaurant.value);
