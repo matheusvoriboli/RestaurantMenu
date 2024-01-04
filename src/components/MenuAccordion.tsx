@@ -25,7 +25,7 @@ const MenuAccordion = forwardRef<HTMLDivElement, MenuAccordionProps>(
     const isLargeScreen = useMediaQuery({ minWidth: 481 }); // Min width of the modal is 480px
 
     const numberOfOrderedItems = (item: Item) => {
-      if (checkoutResponse.checkoutItems.length > 0) {
+      if (checkoutResponse?.checkoutItems?.length > 0) {
         if (item.modifiers && item.modifiers.length > 0) {
           var quantity = 0;
           checkoutResponse.checkoutItems.forEach((checkoutItem) => {

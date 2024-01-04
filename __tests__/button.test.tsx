@@ -1,17 +1,8 @@
 import Button from "@/components/Button";
-import { configureStore } from "@reduxjs/toolkit";
 import { fireEvent } from "@testing-library/react";
 import render from './helpers/ProviderRender';
-import { mockRestaurantData } from "./mocks/mockRestaurantData";
 
 describe("Button", () => {
-  const store = configureStore({
-    reducer: () => ({
-      restaurant: {
-        value: mockRestaurantData,
-      },
-    }),
-  });
   it("renders button", () => {
     const { getByRole } = render(<Button />);
     const buttonElement = getByRole("button");

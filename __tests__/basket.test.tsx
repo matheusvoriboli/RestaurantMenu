@@ -7,9 +7,12 @@ import { mockCheckoutData } from "./mocks/mockCheckoutData";
 import { mockRestaurantData } from "./mocks/mockRestaurantData";
 
 describe("Basket", () => {
-  it("renders without crashing", () => {
-    const { getByTestId } = render(<Basket />)
-    expect(getByTestId("checkout-button")).toBeInTheDocument();
+  it("render all chekout buttons without crashing", () => {
+    const { getAllByTestId } = render(<Basket />)
+    const checkoutButton = getAllByTestId("checkout-button");
+    checkoutButton.forEach((button) => {
+      expect(button).toBeInTheDocument();
+    });
   });
 
   it("calls updateBasketItem when button is clicked", () => {
@@ -25,7 +28,6 @@ describe("Basket", () => {
     });
     const dispatchSpy = jest.spyOn(store, "dispatch");
     
-    // On this example i need to pass this exact store to the Provider
     const { getAllByTestId } = render(
       <Provider store={store}> 
         <Basket />

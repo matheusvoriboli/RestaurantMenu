@@ -3,7 +3,7 @@ import { fireEvent } from "@testing-library/react";
 import render from "./helpers/ProviderRender";
 import { mockItemsData } from "./mocks/mockItemsData";
 
-describe("MenuAccordion", () => {
+describe("Menu Accordion", () => {
   test("accordion opens and closes correctly", () => {
     const { getByTestId, queryByText, getByText } = render(
       <MenuAccordion
