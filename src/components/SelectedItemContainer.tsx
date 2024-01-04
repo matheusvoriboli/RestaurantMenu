@@ -1,6 +1,5 @@
 "use client"
-import { addOrderItem } from "@/redux/features/checkout-slice";
-import { toggleModalVisibility } from "@/redux/features/modal-slice";
+import { addOrderItem, setCurrentCheckoutItemModalVisibility } from "@/redux/features/checkout-slice";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { ModifierItem } from "@/types/Menu";
 import { Dot, Minus, Plus } from "@phosphor-icons/react";
@@ -39,7 +38,7 @@ export default function SelectedItemContainer() {
             price: orderResponse.currentItem.price * quantity
           })
         );
-    dispatch(toggleModalVisibility());
+    dispatch(setCurrentCheckoutItemModalVisibility(false));
   };
 
   const isAddOrderButtonDisabled = () => {

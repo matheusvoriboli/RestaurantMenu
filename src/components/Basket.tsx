@@ -36,7 +36,7 @@ export default function Basket() {
 
   const getTotalValue = () => {
     let totalValue = 0;
-    checkoutResponse.forEach((item) => {
+    checkoutResponse.checkoutItems.forEach((item) => {
       totalValue += item.price;
     });
     return `${t(restaurantResponse.currency)} ${totalValue.toFixed(2)}`;
@@ -48,11 +48,11 @@ export default function Basket() {
         <h1 className="text-main text-xl font-semibold">{t('Basket')}</h1>
       </div>
       <div className="bg-white">
-        {checkoutResponse.length === 0 ? (
+        {checkoutResponse?.checkoutItems?.length === 0 ? (
           <p className="p-5">{t('Your basket is empty')}</p>
         ) : (
           <ul>
-            {checkoutResponse.map((order) => (
+            {checkoutResponse?.checkoutItems?.map((order) => (
               <li
                 className="flex justify-between items-center px-4 py-2 border-b border-inactive-background lg:border-b-0"
                 key={
@@ -108,7 +108,7 @@ export default function Basket() {
           </ul>
         )}
       </div>
-      {checkoutResponse.length > 0 && (
+      {checkoutResponse?.checkoutItems?.length > 0 && (
         <div className="bg-background-default h-full">
           <div className="flex justify-between px-4 py-5 text-main">
             <span>Sub Total</span>

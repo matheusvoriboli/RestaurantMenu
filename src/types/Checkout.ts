@@ -7,6 +7,12 @@ export type CheckoutItem = {
    price: number;
 }
 
+export type Checkout = {
+   checkoutItems: CheckoutItem[];
+   currentItem: Item;
+   currentItemModalVisibility: boolean;
+}
+
 export type VariantItem = {
    id: string;
    name: string;

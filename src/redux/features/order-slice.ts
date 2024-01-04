@@ -14,6 +14,9 @@ export const order = createSlice({
       setCurrentItem: (state, action) => {
           state.value.currentItem = action.payload as Item;
       },
+      showSelectedItemModal: (state) => {
+          state.value.selectedItemModalVisibility = true;
+      }
   },
 });
 

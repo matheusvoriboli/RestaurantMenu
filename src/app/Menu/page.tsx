@@ -58,14 +58,14 @@ export default function Menu() {
             <div className="bg-background-default p-10"></div>
           </div>
         </div>
-        {checkoutResponse.length > 0 && (
+        {checkoutResponse?.checkoutItems?.length > 0 && (
           <div className="lg:hidden bg-[rgba(255,255,255,0.3)] fixed bottom-0 pb-6 backdrop-blur-sm flex flex-col justify-between pt-3 w-full px-4 gap-4">
             <Button onClick={() => setIsModalOpen(true)}>
               <h1 className="text-white text-xl font-semibold">{t('Your basket')}</h1>
               <Dot color="white" weight="bold" size={24} />
               <h1 className="text-white text-xl font-semibold">
-                {checkoutResponse.length}{" "}
-                {checkoutResponse.length === 1 ? "item" : "items"}
+                {checkoutResponse?.checkoutItems?.length}{" "}
+                {checkoutResponse?.checkoutItems?.length === 1 ? "item" : "items"}
               </h1>
             </Button>
           </div>

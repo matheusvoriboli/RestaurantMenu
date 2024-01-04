@@ -1,4 +1,4 @@
-import { toggleModalVisibility } from "@/redux/features/modal-slice";
+import { setCurrentCheckoutItemModalVisibility } from "@/redux/features/checkout-slice";
 import { setCurrentItem } from "@/redux/features/order-slice";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { Item } from "@/types/Menu";
@@ -22,15 +22,14 @@ const MenuAccordion = forwardRef<HTMLDivElement, MenuAccordionProps>(
     const { t } = useTranslation();
     const [accordionOpened, setAccordionOpened] = useState(true);
     const dispatch = useDispatch<AppDispatch>();
-    const isModalVisible = useAppSelector((state) => state.modal.value);
     const checkoutResponse = useAppSelector((state) => state.checkout.value);
     const isLargeScreen = useMediaQuery({ minWidth: 481 }); // Min width of the modal is 480px
 
     const numberOfOrderedItems = (item: Item) => {
-      if (checkoutResponse.length > 0) {
+      if (checkoutResponse.checkoutItems.length > 0) {
         if (item.modifiers && item.modifiers.length > 0) {
           var quantity = 0;
-          checkoutResponse.forEach((checkoutItem) => {
+          checkoutResponse.checkoutItems.forEach((checkoutItem) => {
             if (checkoutItem.item.id === item.id) {
               quantity += checkoutItem.quantity;
             }
@@ -43,7 +42,7 @@ const MenuAccordion = forwardRef<HTMLDivElement, MenuAccordionProps>(
             );
           }
         } else {
-          const itemInCheckout = checkoutResponse.find(
+          const itemInCheckout = checkoutResponse.checkoutItems.find(
             (checkoutItem) => checkoutItem.item.id === item.id
           );
           if (itemInCheckout) {
@@ -60,8 +59,8 @@ const MenuAccordion = forwardRef<HTMLDivElement, MenuAccordionProps>(
     return (
       <>
         <Modal
-          isOpen={isModalVisible}
-          onClose={() => dispatch(toggleModalVisibility())}
+          isOpen={checkoutResponse.currentItemModalVisibility}
+          onClose={() => dispatch(setCurrentCheckoutItemModalVisibility(false))}
           fullScreen={!isLargeScreen}
         >
           <SelectedItemContainer />
@@ -84,7 +83,7 @@ const MenuAccordion = forwardRef<HTMLDivElement, MenuAccordionProps>(
                 className="flex flex-col cursor-pointer"
                 key={item.id}
                 onClick={() => {
-                  dispatch(toggleModalVisibility());
+                  dispatch(setCurrentCheckoutItemModalVisibility(true));
                   dispatch(setCurrentItem(item));
                 }}
               >

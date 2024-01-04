@@ -1,8 +1,11 @@
-import { CheckoutItem } from "@/types/Checkout";
+import { Checkout, CheckoutItem } from "@/types/Checkout";
+import { Item } from "@/types/Menu";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  value: [] as CheckoutItem[],
+const initialState: Checkout = {
+  checkoutItems: [],
+  currentItem: {} as Item, // substitua por um valor inicial adequado para Item
+  currentItemModalVisibility: false,
 };
 
 const addOrder = (index: number, stateValue: CheckoutItem[] , actionPayload: CheckoutItem) => {
@@ -24,39 +27,45 @@ const updateOrder = (index: number, item: CheckoutItem, stateValue: CheckoutItem
 
 export const checkout = createSlice({
   name: "checkout",
-  initialState,
+  initialState: { value: initialState },
   reducers: {
     addOrderItem: (state, action: PayloadAction<CheckoutItem>) => {
-      if (state.value.length === 0) {
-        state.value.push(action.payload as CheckoutItem);
+      if (state.value.checkoutItems.length === 0) {
+        state.value.checkoutItems.push(action.payload as CheckoutItem);
       } else {
         if(action.payload.selectedModifier) {
-          const index = state.value.findIndex(
+          const index = state.value.checkoutItems.findIndex(
             (item) => item.selectedModifier?.id === action.payload.selectedModifier?.id
           );
-          addOrder(index, state.value, action.payload);
+          addOrder(index, state.value.checkoutItems, action.payload);
         } else {
-          const index = state.value.findIndex(
+          const index = state.value.checkoutItems.findIndex(
             (item) => item.item.id === action.payload.item.id
           );
-          addOrder(index, state.value, action.payload);
+          addOrder(index, state.value.checkoutItems, action.payload);
         }
       }
     },
     updateOrderItem: (state, action: PayloadAction<CheckoutItem>) => {
-      state.value.forEach((item, index) => {
+      state.value.checkoutItems.forEach((item, index) => {
         if(item.selectedModifier) {
           if (item.selectedModifier.id === action.payload.selectedModifier?.id) {
-            updateOrder(index, item, state.value, action.payload);
+            updateOrder(index, item, state.value.checkoutItems, action.payload);
           }
         }
         else if (item.item.id === action.payload.item.id) {
-          updateOrder(index, item, state.value, action.payload);
+          updateOrder(index, item, state.value.checkoutItems, action.payload);
         }
       });
+    },
+    setCurrentCheckoutItem: (state, action: PayloadAction<Item>) => {
+      state.value.currentItem = action.payload;
+    },
+    setCurrentCheckoutItemModalVisibility: (state, action: PayloadAction<boolean>) => {
+      state.value.currentItemModalVisibility = action.payload;
     },
   },
 });
 
-export const { addOrderItem, updateOrderItem } = checkout.actions;
+export const { addOrderItem, updateOrderItem, setCurrentCheckoutItem, setCurrentCheckoutItemModalVisibility } = checkout.actions;
 export default checkout.reducer;

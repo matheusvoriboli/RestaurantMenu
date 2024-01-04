@@ -1,4 +1,4 @@
-import { toggleModalVisibility } from "@/redux/features/modal-slice";
+import { setCurrentCheckoutItemModalVisibility } from "@/redux/features/checkout-slice";
 import { setCurrentItem } from "@/redux/features/order-slice";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { Item } from "@/types/Menu";
@@ -105,7 +105,7 @@ export default function SearchMenuItems() {
                     key={item.id}
                     className="flex justify-between p-3 border-t border-inactive-background w-full"
                     onClick={() => {
-                      dispatch(toggleModalVisibility());
+                      dispatch(setCurrentCheckoutItemModalVisibility(true));
                       dispatch(setCurrentItem(item));
                     }}
                   >
