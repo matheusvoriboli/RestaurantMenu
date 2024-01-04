@@ -72,7 +72,7 @@ export default function Menu() {
         )}
       </div>
       <Modal fullScreen={!isLargeScreen} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <Basket />
+        <Basket onCheckout={() => setIsModalOpen(false)} />
       </Modal>
     </>
   );

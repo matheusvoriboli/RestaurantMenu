@@ -64,8 +64,13 @@ export const checkout = createSlice({
     setCurrentCheckoutItemModalVisibility: (state, action: PayloadAction<boolean>) => {
       state.value.currentItemModalVisibility = action.payload;
     },
+    clearCheckout: (state) => {
+      state.value.checkoutItems = [];
+      state.value.currentItem = {} as Item;
+      state.value.currentItemModalVisibility = false;
+    }
   },
 });
 
-export const { addOrderItem, updateOrderItem, setCurrentCheckoutItem, setCurrentCheckoutItemModalVisibility } = checkout.actions;
+export const { addOrderItem, updateOrderItem, setCurrentCheckoutItem, setCurrentCheckoutItemModalVisibility, clearCheckout } = checkout.actions;
 export default checkout.reducer;

@@ -13,10 +13,8 @@ I have defined some css variables according to the information requested by the 
 
 
 I am using Redux to manage the global state and have the following slices:
-   - **checkout**: Where i am defining the selected elements by the user
+   - **checkout**: Where i am defining the selected elements by the user, defining the current item and toggling the modal 
    - **menu**: All the data here is defined through an endpoint request made in the beggining of the app ( Defines the menu informations )
-   - **modal**: Slice to toggle the component and get the modal visibility
-   - **order**: Just set the current item that i'm adding to my basket
    - **restaurant**: All the data here is also defined by an endpoint request made in the beggining of the app ( Defines the restaurant informations )
 
 

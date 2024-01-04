@@ -1,13 +1,21 @@
 import { ButtonSize } from "@/enums/ButtonSize";
-import { updateOrderItem } from "@/redux/features/checkout-slice";
+import {
+  clearCheckout,
+  updateOrderItem,
+} from "@/redux/features/checkout-slice";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { CheckoutItem } from "@/types/Checkout";
 import { Minus, Plus } from "@phosphor-icons/react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 import Button from "./Button";
 
-export default function Basket() {
+type BasketProps = {
+  onCheckout?: () => void;
+};
+
+export default function Basket({ onCheckout }: BasketProps) {
   const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
   const checkoutResponse = useAppSelector((state) => state.checkout.value);
@@ -42,14 +50,27 @@ export default function Basket() {
     return `${t(restaurantResponse.currency)} ${totalValue.toFixed(2)}`;
   };
 
+  const handleCheckout = () => {
+    if (onCheckout) {
+      onCheckout();
+    }
+    Swal.fire({
+      title: "Success!",
+      text: "Your order was submitted",
+      icon: "success",
+      confirmButtonText: "Ok",
+    });
+    dispatch(clearCheckout());
+  };
+
   return (
     <div className="lg:bg-background-default bg-white lg:shadow lg:h-fit h-full min-w-80 relative">
       <div className="p-5 flex justify-center border-b lg:border-b-0 border-b-inactive-background">
-        <h1 className="text-main text-xl font-semibold">{t('Basket')}</h1>
+        <h1 className="text-main text-xl font-semibold">{t("Basket")}</h1>
       </div>
       <div className="bg-white">
         {checkoutResponse?.checkoutItems?.length === 0 ? (
-          <p className="p-5">{t('Your basket is empty')}</p>
+          <p className="p-5">{t("Your basket is empty")}</p>
         ) : (
           <ul>
             {checkoutResponse?.checkoutItems?.map((order) => (
@@ -118,11 +139,24 @@ export default function Basket() {
             <span>Total</span>
             <span className="font-semibold">{getTotalValue()}</span>
           </div>
+          <div className="p-3">
+            <Button
+              dataTestId="checkout-button"
+              fullScreen
+              onClick={handleCheckout}
+            >
+              {t("Checkout now")}
+            </Button>
+          </div>
         </div>
       )}
       <div className="lg:hidden bg-[rgba(255,255,255,0.3)] fixed bottom-0 pb-6 backdrop-blur-sm flex flex-col justify-between pt-3 gap-4 w-full px-2 py-4">
-        <Button dataTestId="checkout-button" fullScreen onClick={() => {}}>
-          {t('Checkout now')}
+        <Button
+          dataTestId="checkout-button"
+          fullScreen
+          onClick={handleCheckout}
+        >
+          {t("Checkout now")}
         </Button>
       </div>
     </div>

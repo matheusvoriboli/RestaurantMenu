@@ -21,7 +21,8 @@
     "react-i18next": "^14.0.0",
     "react-loader-spinner": "^6.1.6",
     "react-redux": "^9.0.4",
-    "react-responsive": "^9.0.2"
+    "react-responsive": "^9.0.2",
+    "sweetalert2": "^11.10.2"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
