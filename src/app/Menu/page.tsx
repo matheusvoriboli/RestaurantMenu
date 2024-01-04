@@ -6,6 +6,7 @@ import Modal from "@/components/Modal";
 import SearchMenuItems from "@/components/SearchMenuItems";
 import { useAppSelector } from "@/redux/store";
 import { Dot } from "@phosphor-icons/react";
+import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 import { useTranslation } from 'react-i18next';
@@ -19,6 +20,9 @@ export default function Menu() {
   const isLargeScreen = useMediaQuery({ minWidth: 481 }); // Min width of the modal is 480px
   return (
     <>
+    <Head>
+        <title>My page title</title>
+      </Head>
       <div className="flex flex-col relative">
         <div className="relative w-full h-36">
           <Image
