@@ -1,3 +1,83 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+   --nav-height: 3rem;
+}
+
+@media screen and (max-width: 1024px) {
+   :root {
+      --nav-height: 4rem;
+   }
+}
+
+.header {
+   height: var(--nav-height);
+   background-color: var(--nav-bg);
+   color: white;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+   display: none;
+ }
+ 
+ /* Hide scrollbar for Firefox */
+ .scrollbar-hide {
+   scrollbar-width: none;
+   -ms-overflow-style: none;  /* IE and Edge */
+ }
+
+@media screen and (min-width: 1024px) {
+   .custom-content-height {
+      min-height: calc(100vh - var(--nav-height) - 9rem); /* 9rem = banner image size */
+   }
+ }
+
+ .side-menu {
+   position: fixed;
+   top: var(--nav-height);
+   bottom: 0;
+   right: 0;
+   width: 100vw;
+   max-width: 500px;
+   z-index: 100;
+   /* display: flex; */
+   pointer-events: none;
+   transition: all .3s ease-in-out;
+   transform: translateX(100%);
+ }
+ 
+ .side-menu-open {
+   transform: translateX(0);
+   pointer-events: auto;
+ }
+
+.main-bg {
+   background-color: var(--primary);
+}
+.primary {
+   color: var(--primary-bg);
+}
+.primary:hover {
+   color: var(--primary-hover);
+}
+
+.nav-bg {
+   background-color: var(--nav-bg);
+}
+.clip-item-description-text {
+   display: -webkit-box;
+   -webkit-line-clamp: 1;
+   -webkit-box-orient: vertical;
+}
+@media screen and (max-width: 1024px) {
+   .clip-item-description-text {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+   }
+}

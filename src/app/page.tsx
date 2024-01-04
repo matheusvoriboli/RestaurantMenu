@@ -1,10 +1,9 @@
-import Link from "next/link";
+import Menu from "./Menu/page";
 
-export default function Home() {
-  return (
-    <div>
-      <h1>Home</h1>
-      <Link href="/Item">Navigate</Link>
-    </div>
-  )
+export const metadata = {
+  title: 'Menu',
+};
+
+export default function App() {
+  return <Menu />;
 }

@@ -13,7 +13,35 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      colors: {
+        'background-default': '#F8F9FA',
+        'background-subtle': '#EEEEEE',
+        'inactive': '#5F5F5F',
+        'inactive-background': '#DADADA',
+        'custom-gray': '#8A94A4',
+        main: '#121212',
+        secondary: '#464646'
+      }
     },
+    screens: {
+      'xsm': '480px',
+      // => @media (min-width: 480px) { ... }
+
+      'sm': '640px',
+      // => @media (min-width: 640px) { ... }
+
+      'md': '768px',
+      // => @media (min-width: 768px) { ... }
+
+      'lg': '1024px',
+      // => @media (min-width: 1024px) { ... }
+
+      'xl': '1280px',
+      // => @media (min-width: 1280px) { ... }
+
+      '2xl': '1536px',
+      // => @media (min-width: 1536px) { ... }
+    }
   },
   plugins: [],
 }
