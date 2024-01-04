@@ -1,5 +1,4 @@
-import { setCurrentCheckoutItemModalVisibility } from "@/redux/features/checkout-slice";
-import { setCurrentItem } from "@/redux/features/order-slice";
+import { setCurrentCheckoutItem, setCurrentCheckoutItemModalVisibility } from "@/redux/features/checkout-slice";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { Item } from "@/types/Menu";
 import { CaretDown } from "@phosphor-icons/react";
@@ -84,7 +83,7 @@ const MenuAccordion = forwardRef<HTMLDivElement, MenuAccordionProps>(
                 key={item.id}
                 onClick={() => {
                   dispatch(setCurrentCheckoutItemModalVisibility(true));
-                  dispatch(setCurrentItem(item));
+                  dispatch(setCurrentCheckoutItem(item));
                 }}
               >
                 <div className="flex justify-between gap-8">

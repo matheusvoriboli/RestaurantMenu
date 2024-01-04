@@ -16,8 +16,8 @@ export default function SelectedItemContainer() {
   const { t } = useTranslation();
   const [selectedModifier, setSelectedModifier] = useState<ModifierItem>();
   const [quantity, setQuantity] = useState<number>(1);
-  const orderResponse = useAppSelector((state) => state.order.value);
   const restaurantResponse = useAppSelector((state) => state.restaurant.value);
+  const checkoutResponse = useAppSelector((state) => state.checkout.value);
   const dispatch = useDispatch<AppDispatch>();
   
 
@@ -25,37 +25,37 @@ export default function SelectedItemContainer() {
     selectedModifier
       ? dispatch(
           addOrderItem({
-            item: orderResponse.currentItem,
+            item: checkoutResponse.currentItem,
             quantity: quantity,
             selectedModifier: selectedModifier,
-            price: (orderResponse.currentItem.price + selectedModifier.price) * quantity
+            price: (checkoutResponse.currentItem.price + selectedModifier.price) * quantity
           })
         )
       : dispatch(
           addOrderItem({
-            item: orderResponse.currentItem,
+            item: checkoutResponse.currentItem,
             quantity: quantity,
-            price: orderResponse.currentItem.price * quantity
+            price: checkoutResponse.currentItem.price * quantity
           })
         );
     dispatch(setCurrentCheckoutItemModalVisibility(false));
   };
 
   const isAddOrderButtonDisabled = () => {
-    return !selectedModifier && orderResponse.currentItem.modifiers && orderResponse.currentItem.modifiers.length > 0;
+    return !selectedModifier && checkoutResponse.currentItem.modifiers && checkoutResponse.currentItem.modifiers.length > 0;
   }
 
   return (
     <>
-      {Object.keys(orderResponse).length == 0 ? (
+      {Object.keys(checkoutResponse).length == 0 ? (
         <Loader />
       ) : (
         <div className="h-full w-full max-w-[480px] max-h-[720px] xsm:min-w-96 flex flex-col">
-          {orderResponse.currentItem.images && (
+          {checkoutResponse.currentItem.images && (
             <div className="w-full h-64 lg:h-72 relative overflow-hidden">
               <Image
-                src={orderResponse.currentItem.images[0].image}
-                alt={orderResponse.currentItem.name}
+                src={checkoutResponse.currentItem.images[0].image}
+                alt={checkoutResponse.currentItem.name}
                 fill
                 className="object-cover"
                 priority
@@ -66,13 +66,13 @@ export default function SelectedItemContainer() {
           <div className="overflow-hidden overflow-y-auto scrollbar-hide pb-9 xsm:pb-[140px]">
             <div className="p-4">
               <h1 className="text-2xl font-semibold text-main">
-                {t(orderResponse?.currentItem?.name)}
+                {t(checkoutResponse?.currentItem?.name)}
               </h1>
               <p className="font-light text-secondary">
-                {t(orderResponse?.currentItem?.description)}
+                {t(checkoutResponse?.currentItem?.description)}
               </p>
             </div>
-            {orderResponse?.currentItem?.modifiers?.map((modifier) => (
+            {checkoutResponse?.currentItem?.modifiers?.map((modifier) => (
               <ModifierContainer
                 setSelectedModifier={setSelectedModifier}
                 selectedModifier={selectedModifier}
@@ -99,7 +99,7 @@ export default function SelectedItemContainer() {
             <Button fullScreen onClick={handleAddToOrder} disabled={isAddOrderButtonDisabled()}>
               {t('Add to order')}
               <Dot size={21} weight="bold" />
-              {t(restaurantResponse.currency)} {(selectedModifier ? selectedModifier.price * quantity : orderResponse?.currentItem?.price * quantity).toFixed(2)}
+              {t(restaurantResponse.currency)} {(selectedModifier ? selectedModifier.price * quantity : checkoutResponse?.currentItem?.price * quantity).toFixed(2)}
             </Button>
           </div>
         </div>

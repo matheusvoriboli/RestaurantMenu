@@ -1,5 +1,4 @@
-import { setCurrentCheckoutItemModalVisibility } from "@/redux/features/checkout-slice";
-import { setCurrentItem } from "@/redux/features/order-slice";
+import { setCurrentCheckoutItem, setCurrentCheckoutItemModalVisibility } from "@/redux/features/checkout-slice";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { Item } from "@/types/Menu";
 import { MagnifyingGlass, X } from "@phosphor-icons/react";
@@ -106,7 +105,7 @@ export default function SearchMenuItems() {
                     className="flex justify-between p-3 border-t border-inactive-background w-full"
                     onClick={() => {
                       dispatch(setCurrentCheckoutItemModalVisibility(true));
-                      dispatch(setCurrentItem(item));
+                      dispatch(setCurrentCheckoutItem(item));
                     }}
                   >
                     <div>
